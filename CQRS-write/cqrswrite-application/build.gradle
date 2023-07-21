@@ -3,6 +3,14 @@ plugins {
 
 tasks.register("prepareKotlinBuildScriptModel"){}
 
+dependencies {
+    //randomString
+    implementation 'net.bytebuddy:byte-buddy:1.12.17'
+
+    //transaction
+    implementation 'org.springframework:spring-tx:5.3.22'
+}
+
 bootJar {
     enabled = false
 }
