@@ -1,0 +1,3 @@
+rootProject.name = 'CQRS-write'
+include("cqrswrite-infrastructure")
+include("cqrswrite-application")
