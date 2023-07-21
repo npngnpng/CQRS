@@ -1,6 +1,5 @@
 package com.example.cqrswrite.common.config;
 
-import com.example.cqrswrite.common.annotation.ReadOnlyUseCase;
 import com.example.cqrswrite.common.annotation.UseCase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -15,7 +14,6 @@ import org.springframework.context.annotation.FilterType;
                         type = FilterType.ANNOTATION,
                         classes = {
                                 UseCase.class,
-                                ReadOnlyUseCase.class
                         }
                 )
         }
