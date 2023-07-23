@@ -7,10 +7,12 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @SuperBuilder
 @NoArgsConstructor
+@Table(name = "tbl_user")
 @Entity
 public class UserEntity extends BaseTimeEntity {
 
