@@ -19,7 +19,7 @@ public abstract class BaseUUIDEntity {
 
     @Id
     @GeneratedValue(generator = "timeBasedUUIDGenerator")
-    @GenericGenerator(name = "timeBasedUUIDGenerator", strategy = "com.example.hexagonalfeed.common.entity.TimeBasedUUIDGenerator")
+    @GenericGenerator(name = "timeBasedUUIDGenerator", strategy = "com.example.cqrswrite.common.entity.TimeBasedUUIDGenerator")
     @Column(columnDefinition = "BINARY(16)", nullable = false)
     private UUID id;
 }
