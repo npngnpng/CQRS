@@ -25,6 +25,6 @@ public class LoginUseCase {
             throw UserException.INVALID_PASSWORD;
         }
 
-        return jwtPort.generateTokens(request.getAccountId());
+        return jwtPort.generateTokens(user.getId().toString());
     }
 }
