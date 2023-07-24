@@ -20,9 +20,9 @@ public class JwtTokenAdapter implements JwtPort {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
-    public TokenResponse generateTokens(String accountId) {
-        String accessToken = generateAccessToken(accountId);
-        String refreshToken = generateRefreshToken(accountId);
+    public TokenResponse generateTokens(String userId) {
+        String accessToken = generateAccessToken(userId);
+        String refreshToken = generateRefreshToken(userId);
 
         return TokenResponse.builder()
                 .accessToken(accessToken)
@@ -32,15 +32,15 @@ public class JwtTokenAdapter implements JwtPort {
                 .build();
     }
 
-    private String generateAccessToken(String accountId) {
-        return generateToken(TokenType.ACCESS, jwtProperties.getAccessExp(), accountId);
+    private String generateAccessToken(String userId) {
+        return generateToken(TokenType.ACCESS, jwtProperties.getAccessExp(), userId);
     }
 
-    private String generateRefreshToken(String accountId) {
-        String token = generateToken(TokenType.REFRESH, jwtProperties.getRefreshExp(), accountId);
+    private String generateRefreshToken(String userId) {
+        String token = generateToken(TokenType.REFRESH, jwtProperties.getRefreshExp(), userId);
         refreshTokenRepository.save(
                 RefreshTokenEntity.builder()
-                        .accountId(accountId)
+                        .id(userId)
                         .token(token)
                         .exp(jwtProperties.getRefreshExp())
                         .build()
@@ -48,10 +48,10 @@ public class JwtTokenAdapter implements JwtPort {
         return token;
     }
 
-    private String generateToken(TokenType type, Integer exp, String accountId) {
+    private String generateToken(TokenType type, Integer exp, String userId) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
-                .setSubject(accountId)
+                .setSubject(userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + (exp * 1000)))
                 .claim("type", type.name())

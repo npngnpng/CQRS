@@ -4,5 +4,5 @@ import com.example.cqrswrite.domain.user.dto.response.TokenResponse;
 
 public interface JwtPort {
 
-    TokenResponse generateTokens(String accountId);
+    TokenResponse generateTokens(String userId);
 }

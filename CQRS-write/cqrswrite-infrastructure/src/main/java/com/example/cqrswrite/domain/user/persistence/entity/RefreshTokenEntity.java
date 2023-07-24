@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.index.Indexed;
 public class RefreshTokenEntity {
 
     @Id
-    private String accountId;
+    private String id;
 
     @Indexed
     private String token;

@@ -1,4 +1,12 @@
 package com.example.cqrswrite.common.spi;
 
-public interface SecurityPort extends PasswordEncoderPort, JwtPort {
+import java.util.UUID;
+
+public interface SecurityPort {
+
+    UUID getCurrentUserId();
+
+    String encodePassword(String password);
+
+    boolean matchesPassword(String rawPassword, String encodedPassword);
 }
