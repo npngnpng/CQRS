@@ -11,6 +11,8 @@ public enum UserErrorCode implements ErrorProperty {
 
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User Not Found"),
 
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "Invalid Password"),
+
     USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "User Already Exists");
 
     private final HttpStatus status;

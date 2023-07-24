@@ -2,6 +2,9 @@ server:
   port: 8081
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_URL:localhost}:3306/${DB_NAME:cqrs-write}?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&rewriteBatchedStatements=true
@@ -17,3 +20,11 @@ spring:
       show_sql: ${SHOW_SQL:true}
   jackson:
     property-naming-strategy: SNAKE_CASE
+
+jwt:
+  header: ${JWT_HEADER:Authorization}
+  prefix : ${JWT_PREFIX:Bearer }
+  secret: ${JWT_SECRET:asdf}
+  access-exp: ${TOKEN_ACCESS_EXP:3600}
+  refresh-exp: ${TOKEN_REFRESH_EXP:1209600}
+
