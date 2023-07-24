@@ -1,6 +1,7 @@
 package com.example.cqrswrite.domain.user.usecase;
 
 import com.example.cqrswrite.common.annotation.UseCase;
+import com.example.cqrswrite.common.spi.PasswordEncoderPort;
 import com.example.cqrswrite.common.spi.SecurityPort;
 import com.example.cqrswrite.domain.user.dto.request.CreateUserRequest;
 import com.example.cqrswrite.domain.user.exception.UserException;
@@ -15,7 +16,7 @@ public class CreateUserUseCase {
 
     private final CommandUserPort commandUserPort;
     private final QueryUserPort queryUserPort;
-    private final SecurityPort securityPort;
+    private final PasswordEncoderPort passwordEncoderPort;
 
     public void execute(CreateUserRequest request) {
         if (queryUserPort.existsUserByAccountId(request.getAccountId())) {
@@ -26,7 +27,7 @@ public class CreateUserUseCase {
                 User.builder()
                         .name(request.getName())
                         .accountId(request.getAccountId())
-                        .password(securityPort.encodePassword(request.getPassword()))
+                        .password(passwordEncoderPort.encodePassword(request.getPassword()))
                         .build()
         );
     }
