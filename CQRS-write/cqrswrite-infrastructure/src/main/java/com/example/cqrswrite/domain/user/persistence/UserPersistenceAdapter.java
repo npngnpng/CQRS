@@ -1,5 +1,6 @@
 package com.example.cqrswrite.domain.user.persistence;
 
+import com.example.cqrswrite.domain.user.exception.UserException;
 import com.example.cqrswrite.domain.user.model.User;
 import com.example.cqrswrite.domain.user.persistence.mapper.UserMapper;
 import com.example.cqrswrite.domain.user.persistence.repository.UserJpaRepository;
@@ -18,6 +19,14 @@ public class UserPersistenceAdapter implements UserPort {
     public User saveUser(User user) {
         return userMapper.toDomain(
                 userJpaRepository.save(userMapper.toEntity(user))
+        );
+    }
+
+    @Override
+    public User queryUserByAccountId(String accountId) {
+        return userMapper.toDomain(
+                userJpaRepository.findByAccountId(accountId)
+                        .orElseThrow(() -> UserException.USER_NOT_FOUND)
         );
     }
 
