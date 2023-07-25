@@ -15,5 +15,6 @@ public class Feed {
     private final UUID id;
     private final String title;
     private final String content;
+    private final UUID userId;
     private final LocalDateTime createdAt;
 }
