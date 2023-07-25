@@ -28,3 +28,5 @@ jwt:
   access-exp: ${TOKEN_ACCESS_EXP:360000}
   refresh-exp: ${TOKEN_REFRESH_EXP:120960000}
 
+kafka:
+  bootstrap-servers: ${KAFKA_SERVER:localhost:9092}
