@@ -4,14 +4,12 @@ import com.example.cqrswrite.common.event.GenericCreateEvent;
 import com.example.cqrswrite.domain.feed.event.vo.CreateFeedEvent;
 import com.example.cqrswrite.domain.feed.persistence.entity.FeedEntity;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@Slf4j
 @Component
-public class FeedEventListener {
+public class FeedEventProduceAdapter {
 
     private final FeedKafkaProducer feedKafkaProducer;
 
