@@ -50,11 +50,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         try {
             return Jwts.parser()
                     .setSigningKey(jwtProperties.getSecret())
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {
             throw ExpiredTokenException.EXCEPTION;
         } catch (Exception e) {
+            e.printStackTrace();
             throw InvalidTokenException.EXCEPTION;
         }
     }

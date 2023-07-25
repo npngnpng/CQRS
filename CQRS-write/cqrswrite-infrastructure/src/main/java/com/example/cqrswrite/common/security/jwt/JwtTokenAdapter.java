@@ -33,6 +33,7 @@ public class JwtTokenAdapter implements JwtPort {
     }
 
     private String generateAccessToken(String userId) {
+        System.out.println(jwtProperties.getAccessExp());
         return generateToken(TokenType.ACCESS, jwtProperties.getAccessExp(), userId);
     }
 
@@ -50,12 +51,11 @@ public class JwtTokenAdapter implements JwtPort {
 
     private String generateToken(TokenType type, Integer exp, String userId) {
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .setSubject(userId)
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + (exp * 1000)))
                 .claim("type", type.name())
-                .claim("exp", exp)
                 .compact();
     }
 }
