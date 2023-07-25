@@ -22,11 +22,11 @@ public class KafkaProducerConfig {
     private String bootstrapServers;
 
     @Bean
-    public KafkaTemplate<String, CreateFeedEvent> creaeteFeedEventKafkaTemplate() {
-        return new KafkaTemplate<>(createProducerFactory(CreateFeedEvent.class));
+    public KafkaTemplate<String, ?> kafkaTemplate() {
+        return new KafkaTemplate<>(createProducerFactory());
     }
 
-    private <T> DefaultKafkaProducerFactory<String, T> createProducerFactory(Class<T> type) {
+    private DefaultKafkaProducerFactory<String, ?> createProducerFactory() {
         Map<String, Object> configProperties = new HashMap<>();
         configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
