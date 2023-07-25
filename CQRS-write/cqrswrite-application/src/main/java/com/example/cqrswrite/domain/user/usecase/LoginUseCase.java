@@ -2,7 +2,7 @@ package com.example.cqrswrite.domain.user.usecase;
 
 import com.example.cqrswrite.common.annotation.UseCase;
 import com.example.cqrswrite.common.spi.JwtPort;
-import com.example.cqrswrite.common.spi.PasswordEncoderPort;
+import com.example.cqrswrite.common.spi.SecurityPort;
 import com.example.cqrswrite.domain.user.dto.request.LoginRequest;
 import com.example.cqrswrite.domain.user.dto.response.TokenResponse;
 import com.example.cqrswrite.domain.user.exception.UserException;
@@ -15,13 +15,13 @@ import lombok.RequiredArgsConstructor;
 public class LoginUseCase {
 
     private final QueryUserPort queryUserPort;
-    private final PasswordEncoderPort passwordEncoderPort;
+    private final SecurityPort securityPort;
     private final JwtPort jwtPort;
 
     public TokenResponse execute(LoginRequest request) {
         User user = queryUserPort.queryUserByAccountId(request.getAccountId());
 
-        if (!passwordEncoderPort.matchesPassword(request.getPassword(), user.getPassword())) {
+        if (!securityPort.matchesPassword(request.getPassword(), user.getPassword())) {
             throw UserException.INVALID_PASSWORD;
         }
 
