@@ -8,6 +8,8 @@ import com.example.cqrswrite.domain.user.spi.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Component
 public class UserPersistenceAdapter implements UserPort {
@@ -26,6 +28,14 @@ public class UserPersistenceAdapter implements UserPort {
     public User queryUserByAccountId(String accountId) {
         return userMapper.toDomain(
                 userJpaRepository.findByAccountId(accountId)
+                        .orElseThrow(() -> UserException.USER_NOT_FOUND)
+        );
+    }
+
+    @Override
+    public User queryUserById(UUID id) {
+        return userMapper.toDomain(
+                userJpaRepository.findById(id)
                         .orElseThrow(() -> UserException.USER_NOT_FOUND)
         );
     }
