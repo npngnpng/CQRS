@@ -1,4 +1,4 @@
-package com.example.cqrswrite.common.event;
+package com.example.cqrswrite.common.event.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

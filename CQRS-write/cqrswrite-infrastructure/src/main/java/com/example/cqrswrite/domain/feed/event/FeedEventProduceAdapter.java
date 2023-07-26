@@ -1,6 +1,6 @@
 package com.example.cqrswrite.domain.feed.event;
 
-import com.example.cqrswrite.common.event.GenericCreateEvent;
+import com.example.cqrswrite.common.event.dto.GenericCreateEvent;
 import com.example.cqrswrite.domain.feed.event.vo.CreateFeedEvent;
 import com.example.cqrswrite.domain.feed.persistence.entity.FeedEntity;
 import lombok.RequiredArgsConstructor;

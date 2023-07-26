@@ -1,5 +1,6 @@
 package com.example.cqrswrite.common.event;
 
+import com.example.cqrswrite.common.event.dto.GenericCreateEvent;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.event.spi.PostInsertEvent;
 import org.hibernate.event.spi.PostInsertEventListener;
