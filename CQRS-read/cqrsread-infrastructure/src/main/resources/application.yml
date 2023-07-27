@@ -1,0 +1,15 @@
+kafka:
+  bootstrap-servers: localhost:9092
+
+spring:
+  data:
+    mongodb:
+      host: {DB_HOST:localhost}
+      port: {DB_PORT:27017}
+      username: {DB_USERNAME:root}
+      password: {DB_PASSWORD:1234}
+      authentication-database: admin
+      database: cqrs-read
+
+server:
+  port: 8082
