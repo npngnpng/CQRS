@@ -27,6 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation(project(":cqrsread-application"))
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
