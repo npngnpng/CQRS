@@ -18,17 +18,17 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation ("org.springframework.boot:spring-boot-starter-data-mongodb-reactive:3.1.2")
+//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive:3.1.2")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.kafka:spring-kafka")
     implementation(project(":cqrsread-application"))
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
+
+noArg {
+    annotation("org.springframework.data.mongodb.core.mapping.Document")
+}

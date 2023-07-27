@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     kotlin("jvm") version "1.7.22"
 }
@@ -17,11 +19,12 @@ subprojects {
     }
 
     dependencies {
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.2.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
+//        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     }
 }
 
