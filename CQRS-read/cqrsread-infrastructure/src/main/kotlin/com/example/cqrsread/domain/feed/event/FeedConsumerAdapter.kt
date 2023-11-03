@@ -19,14 +19,13 @@ import kotlin.concurrent.thread
 
 @Component
 class FeedConsumerAdapter(
-    private val feedPersistenceAdapter: FeedPersistenceAdapter,
+    private val createFeedEventUseCase: CreateFeedEventUseCase,
 ) {
 
     @KafkaListener(topics = ["feed"], groupId = "foo", containerFactory = "createFeedEventContainerFactory")
     fun createFeedEvent(event: CreateFeedEvent) {
         CoroutineScope(Dispatchers.IO).launch {
-            feedPersistenceAdapter.saveFeedsEntity(event)
-            feedPersistenceAdapter.saveFeedDetailsEntity(event)
+            createFeedEventUseCase.execute(event)
         }
     }
 }

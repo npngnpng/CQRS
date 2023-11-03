@@ -1,39 +1,37 @@
 package com.example.cqrsread.domain.feed.persistence
 
-import com.example.cqrsread.domain.feed.event.vo.CreateFeedEvent
+import com.example.cqrsread.domain.feed.dto.event.CreateFeedEvent
+import com.example.cqrsread.domain.feed.mapper.FeedDetailsMapper
+import com.example.cqrsread.domain.feed.mapper.FeedsMapper
+import com.example.cqrsread.domain.feed.model.FeedDetails
+import com.example.cqrsread.domain.feed.model.Feeds
 import com.example.cqrsread.domain.feed.persistence.entity.FeedDetailsEntity
 import com.example.cqrsread.domain.feed.persistence.entity.FeedsEntity
 import com.example.cqrsread.domain.feed.persistence.repository.FeedDetailsRepository
 import com.example.cqrsread.domain.feed.persistence.repository.FeedsRepository
+import com.example.cqrsread.domain.feed.spi.FeedPort
+import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Component
+import java.util.UUID
 
 @Component
 class FeedPersistenceAdapter(
     private val feedDetailsRepository: FeedDetailsRepository,
     private val feedsRepository: FeedsRepository,
-) {
+    private val feedsMapper: FeedsMapper,
+    private val feedDetailsMapper: FeedDetailsMapper,
+) : FeedPort {
 
-    suspend fun saveFeedDetailsEntity(event: CreateFeedEvent) {
+    override suspend fun saveFeedDetailsEntity(feedDetails: FeedDetails) {
         feedDetailsRepository.save(
-            FeedDetailsEntity(
-                id = event.id.toString(),
-                title = event.title,
-                content = event.content,
-                username = event.username,
-                createdAt = event.createdAt
-            )
+            feedDetailsMapper.toEntity(feedDetails)
         ).awaitSingle()
     }
 
-    suspend fun saveFeedsEntity(event: CreateFeedEvent) {
+    override suspend fun saveFeedsEntity(feeds: Feeds) {
         feedsRepository.save(
-            FeedsEntity(
-                id = event.id.toString(),
-                title = event.title,
-                createdAt = event.createdAt,
-                username = event.username
-            )
+            feedsMapper.toEntity(feeds)
         ).awaitSingle()
     }
 }
