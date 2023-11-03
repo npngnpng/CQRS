@@ -1,4 +1,4 @@
-package com.example.cqrsread.domain.feed.event.vo
+package com.example.cqrsread.domain.feed.dto.event
 
 import java.time.LocalDateTime
 import java.util.UUID

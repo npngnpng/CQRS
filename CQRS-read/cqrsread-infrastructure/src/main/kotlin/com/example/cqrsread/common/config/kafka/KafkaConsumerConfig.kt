@@ -1,6 +1,6 @@
 package com.example.cqrsread.common.config.kafka
 
-import com.example.cqrsread.domain.feed.event.vo.CreateFeedEvent
+import com.example.cqrsread.domain.feed.dto.event.CreateFeedEvent
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.springframework.beans.factory.annotation.Value
