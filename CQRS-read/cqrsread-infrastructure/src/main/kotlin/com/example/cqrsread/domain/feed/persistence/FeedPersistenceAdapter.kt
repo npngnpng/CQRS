@@ -10,6 +10,9 @@ import com.example.cqrsread.domain.feed.persistence.entity.FeedsEntity
 import com.example.cqrsread.domain.feed.persistence.repository.FeedDetailsRepository
 import com.example.cqrsread.domain.feed.persistence.repository.FeedsRepository
 import com.example.cqrsread.domain.feed.spi.FeedPort
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Component
@@ -34,4 +37,14 @@ class FeedPersistenceAdapter(
             feedsMapper.toEntity(feeds)
         ).awaitSingle()
     }
+
+    override suspend fun queryFeeds(): Flow<Feeds> =
+        feedsRepository.findAll().asFlow().map {
+            feedsMapper.toDomain(it)
+        }
+
+    override suspend fun queryFeedDetailsById(id: String): FeedDetails =
+        feedDetailsMapper.toDomain(
+            feedDetailsRepository.findById(id).awaitSingle()
+        )
 }
