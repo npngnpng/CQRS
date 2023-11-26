@@ -12,7 +12,6 @@ class QueryFeedsUseCase(
 ) {
 
     suspend fun execute(): Flow<Feeds> {
-
         return queryFeedPort.queryFeeds()
     }
 }
